@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>World Domination</title>
+  <meta name="description" content="Play World Domination (2003), the classic turn-based Flash strategy game, in your browser via Ruffle.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>World <span>Domination</span></h1>
+    <p>Classic turn-based strategy, 2003 &middot; Youdagames NL</p>
+  </header>
+
+  <main>
+    <div class="toolbar">
+      <button id="btn-play" class="primary">Play</button>
+      <button id="btn-play-fs">Play in fullscreen</button>
+      <button id="btn-fs" disabled>Fullscreen</button>
+      <span class="spacer"></span>
+      <label class="field">Scale
+        <select id="scale">
+          <option value="fit" selected>Fit to window</option>
+          <option value="1">1&times; (700&times;450)</option>
+          <option value="1.5">1.5&times; (1050&times;675)</option>
+          <option value="2">2&times; (1400&times;900)</option>
+          <option value="3">3&times; (2100&times;1350)</option>
+        </select>
+      </label>
+      <label class="field">Quality
+        <select id="quality">
+          <option value="best" selected>Best</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </label>
+    </div>
+
+    <div id="stage-wrap">
+      <div id="stage"></div>
+      <div id="splash">
+        <h2>World Domination</h2>
+        <p>Choose a nation. Crush four rivals. Rule the world.</p>
+        <div class="actions">
+          <button class="primary" data-launch="window">Play</button>
+          <button data-launch="fullscreen">Play in fullscreen</button>
+        </div>
+      </div>
+      <button id="fs-exit" title="Exit fullscreen (Esc)">Exit fullscreen</button>
+    </div>
+
+    <div id="status">Not running</div>
+  </main>
+
+  <footer>
+    Runs on <a href="https://ruffle.rs" target="_blank" rel="noopener">Ruffle</a>, an open-source Flash Player emulator.
+    Flash vector graphics are re-rendered at the displayed size, so larger scales look sharper rather than blurrier.
+  </footer>
+
+  <script src="https://unpkg.com/@ruffle-rs/ruffle@0.7.1/ruffle.js"></script>
+  <script src="launcher.js"></script>
+</body>
+</html>

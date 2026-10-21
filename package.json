@@ -4,26 +4,13 @@
   "description": "Classic strategy game from 2003. Developed by Youdagames NL.",
   "main": "index.js",
   "scripts": {
-    "run": "npm run start",
-    "test": "npm run test"
+    "start": "node server.js",
+    "test": "echo \"No tests\""
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/anteroul/world-domination-1.git"
   },
-  "keywords": [
-    "world-domination",
-    "war",
-    "military",
-    "strategy"
-    "combat",
-    "warfare",
-    "wmd",
-    "terrorism",
-    "ww3",
-    "strategy",
-    "rts"
-  ],
   "author": "anteroul, I Sioux",
   "license": "MIT",
   "bugs": {

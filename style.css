@@ -1,0 +1,188 @@
+:root {
+  --bg: #0d1110;
+  --panel: #161c1a;
+  --panel-2: #1e2623;
+  --line: #2c3833;
+  --text: #e4e9e5;
+  --muted: #8d9a93;
+  --accent: #c8a24a;
+  --accent-ink: #1a1405;
+  --danger: #b5432f;
+  --radius: 6px;
+  --stage-w: 700;
+  --stage-h: 450;
+}
+
+* { box-sizing: border-box; }
+
+/* Author display rules (e.g. #splash's grid) would otherwise override the hidden attribute. */
+[hidden] { display: none !important; }
+
+html, body { margin: 0; height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 span { color: var(--accent); }
+
+header p { margin: 0; color: var(--muted); font-size: 13px; }
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 24px 24px;
+  min-height: 0;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbar .spacer { flex: 1; }
+
+button, select {
+  font: inherit;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled), select:hover { border-color: var(--muted); }
+button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button:disabled { opacity: 0.45; cursor: default; }
+
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+
+label.field {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+#stage-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 320px;
+  background: #000;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: auto;
+  display: grid;
+}
+
+#stage-wrap:fullscreen {
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+#stage {
+  margin: auto; /* centers, but stays scrollable when larger than the frame */
+  width: calc(var(--stage-w) * 1px);
+  height: calc(var(--stage-h) * 1px);
+}
+
+#stage ruffle-player, #stage ruffle-object, #stage > * {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* In fullscreen the player always fills the screen; Ruffle letterboxes it. */
+#stage-wrap:fullscreen #stage { width: 100vw; height: 100vh; }
+
+#splash {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 16px;
+  text-align: center;
+  padding: 16px;
+  background:
+    radial-gradient(ellipse at center, rgba(200, 162, 74, 0.12), transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0 39px, rgba(255,255,255,0.03) 39px 40px),
+    repeating-linear-gradient(90deg, transparent 0 39px, rgba(255,255,255,0.03) 39px 40px),
+    #050706;
+}
+
+#splash h2 {
+  margin: 0;
+  font-size: clamp(28px, 6vw, 56px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+#splash p { margin: 0; color: var(--muted); }
+
+#splash .actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+#splash button { padding: 12px 22px; font-size: 16px; }
+
+#fs-exit {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+#stage-wrap:fullscreen #fs-exit { display: block; }
+#stage-wrap:fullscreen:hover #fs-exit, #fs-exit:focus-visible { opacity: 1; }
+
+#status { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+
+footer {
+  padding: 12px 24px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer a { color: var(--muted); }
+
+@media (max-width: 640px) {
+  header, main, footer { padding-left: 16px; padding-right: 16px; }
+  .toolbar .spacer { display: none; }
+}

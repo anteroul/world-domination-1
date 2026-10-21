@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Globe in a gunsight: World Domination -->
+  <rect width="64" height="64" rx="12" fill="#0d1110"/>
+  <circle cx="32" cy="32" r="20" fill="#1f4a3a"/>
+  <!-- stylized continents -->
+  <path fill="#5f8f4e" d="M19 22c4-4 9-5 12-3 2 2-1 4 1 6s5 0 6 3-3 5-6 5-4 4-7 3-3-5-6-6-3-5 0-8z"/>
+  <path fill="#5f8f4e" d="M38 17c4 1 9 5 10 10 0 3-3 2-5 1s-3-3-6-3-3-5 1-8z"/>
+  <path fill="#5f8f4e" d="M36 38c3-1 7 0 8 3s-2 7-5 8-4-2-4-5-2-5 1-6z"/>
+  <!-- meridians -->
+  <g fill="none" stroke="#0d1110" stroke-opacity=".35" stroke-width="1.2">
+    <ellipse cx="32" cy="32" rx="9" ry="20"/>
+    <path d="M12 32h40"/>
+  </g>
+  <!-- crosshair -->
+  <g fill="none" stroke="#c8a24a" stroke-width="3" stroke-linecap="round">
+    <circle cx="32" cy="32" r="24"/>
+    <path d="M32 3v11M32 50v11M3 32h11M50 32h11"/>
+  </g>
+  <circle cx="32" cy="32" r="3" fill="#b5432f"/>
+</svg>
