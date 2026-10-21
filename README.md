@@ -17,3 +17,6 @@ nix run              # or, with Node.js installed: npm start
 ```
 
 Then open <http://localhost:8080>. Use **Play in fullscreen** (or the **Fullscreen** button while playing) to fill the screen. The **Scale** menu sizes the game up to 3× its native 700×450; because Flash graphics are vectors, Ruffle redraws them at the larger size instead of stretching pixels.
+
+## 🌐 GitHub Pages
+`npm run build` copies the site into `dist/`. Pushing to `main` runs `.github/workflows/pages.yml`, which builds and deploys it. One-time setup: in the repository's **Settings → Pages**, set **Source** to **GitHub Actions**.
