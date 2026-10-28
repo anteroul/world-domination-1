@@ -5,12 +5,13 @@ const fs = require("fs");
 const path = require("path");
 
 const OUT = path.join(__dirname, "dist");
-const FILES = ["index.html", "style.css", "launcher.js", "profile.js", "favicon.svg", "WorldDomination1.swf"];
+const FILES = ["index.html", "style.css", "launcher.js", "profile.js", "favicon.svg", "swf/WorldDomination1.swf"];
 
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT);
 
 for (const file of FILES) {
+  fs.mkdirSync(path.dirname(path.join(OUT, file)), { recursive: true });
   fs.copyFileSync(path.join(__dirname, file), path.join(OUT, file));
   console.log(`  ${file}`);
 }

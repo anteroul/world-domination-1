@@ -26,6 +26,28 @@
 
   let player = null;
 
+  // The score submit is getURL(".../popup_highscore.phtml?uid=...&score=N",
+  // "_blank", "GET"). Flash appends the movie's variables to the URL's existing
+  // query string; Ruffle sends them by submitting a GET <form>, and browsers
+  // replace the action's query string with the form fields, dropping uid and
+  // score. Put the action's own parameters back in as leading hidden fields.
+  const nativeSubmit = HTMLFormElement.prototype.submit;
+  HTMLFormElement.prototype.submit = function () {
+    if (this.method.toLowerCase() === "get") {
+      const action = new URL(this.action, location.href);
+      const fields = document.createDocumentFragment();
+      action.searchParams.forEach(function (value, name) {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = name;
+        input.value = value;
+        fields.appendChild(input);
+      });
+      this.prepend(fields);
+    }
+    return nativeSubmit.call(this);
+  };
+
   // Local testing aid: report URLs the SWF opens in a new window via getURL
   // (Ruffle calls window.open), so you can see whether urlRewriteRules took
   // effect. Same-tab navigations (target "") bypass this; check the console

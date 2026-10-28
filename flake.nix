@@ -12,11 +12,12 @@
         pkgs = nixpkgs.legacyPackages.${system};
 
         site = pkgs.runCommand "world-domination-1-site" { } ''
-          mkdir -p $out
+          mkdir -p $out/swf
           cp ${./index.html} $out/index.html
           cp ${./style.css} $out/style.css
           cp ${./launcher.js} $out/launcher.js
-          cp ${./WorldDomination1.swf} $out/WorldDomination1.swf
+          cp ${./profile.js} $out/profile.js
+          cp ${./swf/WorldDomination1.swf} $out/swf/WorldDomination1.swf
           cp ${./server.js} $out/server.js
           cp ${./favicon.svg} $out/favicon.svg
         '';
@@ -25,6 +26,8 @@
           name = "world-domination-1";
           runtimeInputs = [ pkgs.nodejs ];
           text = ''
+            # The site lives in the read-only Nix store; keep scores elsewhere.
+            export WD1_DB="''${WD1_DB:-''${XDG_DATA_HOME:-$HOME/.local/share}/world-domination-1/scores.sqlite}"
             exec node ${site}/server.js "$@"
           '';
         };
