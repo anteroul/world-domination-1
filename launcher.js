@@ -1,5 +1,15 @@
 (function () {
-  const SWF_URL = "WorldDomination1.swf";
+  const SWF_URL = "./swf/WorldDomination1.swf";
+
+  // The SWF still links to the long-gone entertainmail.net hiscore service:
+  //   submit:  /popup_highscore.phtml?uid=...&score=...
+  //   view:    /eshop/worlddomination/highscores.php
+  // Ruffle rewrites those requests to our own backend. Locally that is the
+  // same origin as this page (server.js serves both); on GitHub Pages it is
+  // the separately hosted hiscore service.
+  const LOCAL = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+  const HISCORE_HOST = LOCAL ? location.origin + "/" : "https://scores.yourdomain/"; // trailing slash matters
+  window.WD1_HISCORE_HOST = HISCORE_HOST; // read by profile.js
   const BASE_W = 700;
   const BASE_H = 450;
 
@@ -15,6 +25,21 @@
   const btnFsExit = document.getElementById("fs-exit");
 
   let player = null;
+
+  // Local testing aid: report URLs the SWF opens in a new window via getURL
+  // (Ruffle calls window.open), so you can see whether urlRewriteRules took
+  // effect. Same-tab navigations (target "") bypass this; check the console
+  // for Ruffle's "URL rewrite rule triggered" line instead.
+  if (LOCAL) {
+    const nativeOpen = window.open;
+    window.open = function (url, target, features) {
+      const ok = String(url).indexOf(HISCORE_HOST) === 0;
+      const line = (ok ? "getURL rewritten OK → " : "getURL NOT rewritten → ") + url;
+      (ok ? console.info : console.warn)("[wd1] " + line + " (target " + target + ")");
+      status.textContent = line;
+      return nativeOpen.call(window, url, target, features);
+    };
+  }
 
   function load(key, fallback) {
     try { return localStorage.getItem(key) || fallback; } catch (e) { return fallback; }
@@ -93,6 +118,13 @@
       splashScreen: true,
       allowFullscreen: true,
       contextMenu: "on",
+      // The main menu's Hiscores button does getURL(url, "") — i.e. navigate the
+      // current tab — which Ruffle only permits with script access enabled.
+      allowScriptAccess: true,
+      logLevel: LOCAL ? "info" : "error", // shows Ruffle's "URL rewrite rule triggered" in the console
+      urlRewriteRules: [
+        [/^https?:\/\/(www\.)?entertainmail\.net\//, HISCORE_HOST],
+      ],
     }).catch(function (err) {
       status.textContent = "Failed to load " + SWF_URL + ": " + err +
         ". If you opened this file directly, serve the folder over HTTP instead (see README).";

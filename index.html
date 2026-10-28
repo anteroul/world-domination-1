@@ -12,6 +12,11 @@
   <header>
     <h1>World <span>Domination</span></h1>
     <p>Classic turn-based strategy, 2003 &middot; Youdagames NL</p>
+    <div id="player-card" title="Your player name">
+      <span id="player-flag" class="flag" role="img" aria-label="Unknown country">&#127760;</span>
+      <span id="player-name" class="player-name">&hellip;</span>
+      <button id="btn-rename" class="link" type="button">Change</button>
+    </div>
   </header>
 
   <main>
@@ -39,17 +44,29 @@
       </label>
     </div>
 
-    <div id="stage-wrap">
-      <div id="stage"></div>
-      <div id="splash">
-        <h2>World Domination</h2>
-        <p>Choose a nation. Crush four rivals. Rule the world.</p>
-        <div class="actions">
-          <button class="primary" data-launch="window">Play</button>
-          <button data-launch="fullscreen">Play in fullscreen</button>
+    <div class="play-area">
+      <div id="stage-wrap">
+        <div id="stage"></div>
+        <div id="splash">
+          <h2>World Domination</h2>
+          <p>Choose a nation. Crush four rivals. Rule the world.</p>
+          <div class="actions">
+            <button class="primary" data-launch="window">Play</button>
+            <button data-launch="fullscreen">Play in fullscreen</button>
+          </div>
         </div>
+        <button id="fs-exit" title="Exit fullscreen (Esc)">Exit fullscreen</button>
       </div>
-      <button id="fs-exit" title="Exit fullscreen (Esc)">Exit fullscreen</button>
+
+      <aside id="hiscores" aria-labelledby="hiscores-title">
+        <div class="widget-head">
+          <h2 id="hiscores-title">Hiscores</h2>
+          <button id="btn-hiscores-refresh" class="link" type="button" title="Refresh">Refresh</button>
+        </div>
+        <ol id="hiscores-list" class="board"></ol>
+        <p id="hiscores-msg" class="muted">Loading&hellip;</p>
+        <a id="hiscores-more" href="highscores">Full leaderboard</a>
+      </aside>
     </div>
 
     <div id="status">Not running</div>
@@ -62,5 +79,6 @@
 
   <script src="https://unpkg.com/@ruffle-rs/ruffle@0.7.1/ruffle.js"></script>
   <script src="launcher.js"></script>
+  <script src="profile.js"></script>
 </body>
 </html>
