@@ -108,7 +108,65 @@ label.field {
   font-size: 14px;
 }
 
-#player-card .flag { font-size: 20px; line-height: 1; }
+#player-card { position: relative; }
+
+#player-card .flag {
+  font-size: 20px;
+  line-height: 1;
+  padding: 2px 4px;
+  background: none;
+  border: 1px solid transparent;
+}
+
+#player-card .flag[aria-expanded="true"] { border-color: var(--muted); }
+
+.country-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 50;
+  width: max(100%, 240px);
+  max-width: calc(100vw - 32px);
+  padding: 6px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.country-menu input {
+  width: 100%;
+  font: inherit;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 6px 8px;
+}
+
+.country-menu input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.country-menu ul {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.country-menu li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.country-menu li.active { background: var(--panel-2); }
+.country-menu li[aria-selected="true"] { color: var(--accent); font-weight: 600; }
+.country-menu li.empty { color: var(--muted); cursor: default; }
+.country-menu .opt-flag { font-size: 18px; line-height: 1; }
 #player-card .player-name { font-weight: 600; }
 
 button.link {

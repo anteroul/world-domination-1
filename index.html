@@ -12,9 +12,14 @@
   <header>
     <h1>World <span>Domination</span></h1>
     <p>Classic turn-based strategy, 2003 &middot; Youdagames NL</p>
-    <div id="player-card" title="Your player name">
-      <span id="player-flag" class="flag" role="img" aria-label="Unknown country">&#127760;</span>
-      <span id="player-name" class="player-name">&hellip;</span>
+    <div id="player-card">
+      <button id="player-flag" class="flag" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Country: unknown. Change country">&#127760;</button>
+      <div id="country-menu" class="country-menu" hidden>
+        <input id="country-search" type="search" placeholder="Search countries" autocomplete="off" spellcheck="false"
+               role="combobox" aria-label="Search countries" aria-expanded="true" aria-controls="country-list" aria-autocomplete="list">
+        <ul id="country-list" role="listbox" aria-label="Countries"></ul>
+      </div>
+      <span id="player-name" class="player-name" title="Your player name">&hellip;</span>
       <button id="btn-rename" class="link" type="button">Change</button>
     </div>
   </header>
